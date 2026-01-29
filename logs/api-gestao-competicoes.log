@@ -1,0 +1,33 @@
+2026-01-28 20:24:21 - Starting GestaoCompeticoesApiApplication using Java 21.0.8 with PID 17844 (C:\Users\edson\Downloads\gestao-competicoes-api\target\classes started by edson in C:\Users\edson\Downloads\gestao-competicoes-api)
+2026-01-28 20:24:21 - No active profile set, falling back to 1 default profile: "default"
+2026-01-28 20:24:22 - Initializing ProtocolHandler ["http-nio-8080"]
+2026-01-28 20:24:22 - Starting service [Tomcat]
+2026-01-28 20:24:22 - Starting Servlet engine: [Apache Tomcat/10.1.50]
+2026-01-28 20:24:22 - Initializing Spring embedded WebApplicationContext
+2026-01-28 20:24:22 - HikariPool-1 - Starting...
+2026-01-28 20:24:23 - HikariPool-1 - Starting...
+2026-01-28 20:24:24 - Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+2026-01-28 20:24:25 - Starting ProtocolHandler ["http-nio-8080"]
+2026-01-28 20:24:25 - Started GestaoCompeticoesApiApplication in 4.385 seconds (process running for 4.829)
+2026-01-28 21:20:12 - Starting GestaoCompeticoesApiApplication using Java 21.0.8 with PID 8628 (C:\Users\edson\Downloads\gestao-competicoes-api\target\classes started by edson in C:\Users\edson\Downloads\gestao-competicoes-api)
+2026-01-28 21:20:12 - No active profile set, falling back to 1 default profile: "default"
+2026-01-28 21:20:13 - Initializing ProtocolHandler ["http-nio-8080"]
+2026-01-28 21:20:13 - Starting service [Tomcat]
+2026-01-28 21:20:13 - Starting Servlet engine: [Apache Tomcat/10.1.50]
+2026-01-28 21:20:13 - Initializing Spring embedded WebApplicationContext
+2026-01-28 21:20:14 - HikariPool-1 - Starting...
+2026-01-28 21:20:15 - HikariPool-1 - Starting...
+2026-01-28 21:20:16 - Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+2026-01-28 21:20:17 - Starting ProtocolHandler ["http-nio-8080"]
+2026-01-28 21:20:17 - Started GestaoCompeticoesApiApplication in 4.97 seconds (process running for 5.403)
+2026-01-28 21:27:55 - Starting GestaoCompeticoesApiApplication using Java 21.0.8 with PID 29220 (C:\Users\edson\Downloads\gestao-competicoes-api\target\classes started by edson in C:\Users\edson\Downloads\gestao-competicoes-api)
+2026-01-28 21:27:55 - No active profile set, falling back to 1 default profile: "default"
+2026-01-28 21:27:56 - Initializing ProtocolHandler ["http-nio-8080"]
+2026-01-28 21:27:56 - Starting service [Tomcat]
+2026-01-28 21:27:56 - Starting Servlet engine: [Apache Tomcat/10.1.50]
+2026-01-28 21:27:56 - Initializing Spring embedded WebApplicationContext
+2026-01-28 21:27:56 - HikariPool-1 - Starting...
+2026-01-28 21:27:57 - HikariPool-1 - Starting...
+2026-01-28 21:27:58 - Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+2026-01-28 21:28:00 - Starting ProtocolHandler ["http-nio-8080"]
+2026-01-28 21:28:00 - Started GestaoCompeticoesApiApplication in 5.251 seconds (process running for 5.769)
