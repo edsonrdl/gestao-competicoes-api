@@ -1,4 +1,8 @@
 package br.com.esportes.gestao_competicoes_api.modulo_competicao;
 
-public interface ModalidadeRepository {
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ModalidadeRepository extends CrudRepository<ModalidadeModel, Long> {
 }
