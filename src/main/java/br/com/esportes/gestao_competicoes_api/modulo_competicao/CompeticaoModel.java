@@ -7,6 +7,7 @@ import java.util.List;
 
 @Entity
 public class CompeticaoModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,6 +18,7 @@ public class CompeticaoModel {
     private String regulamento;
 
     private LocalDate dataInicio;
+
     private LocalDate dataFim;
 
     @OneToMany(mappedBy = "competicao")

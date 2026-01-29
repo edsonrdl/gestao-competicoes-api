@@ -12,7 +12,7 @@ public class GrupoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome; // Ex: Grupo A
+    private String nome;
 
     @ManyToOne
     @JoinColumn(name = "modalidade_id")

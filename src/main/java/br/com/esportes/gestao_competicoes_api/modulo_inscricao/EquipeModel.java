@@ -11,9 +11,12 @@ public class EquipeModel {
     private Long id;
 
     private String nome;
+
     private String nomeResponsavel;
-    private String contato;        // Email ou telemóvel
-    private String documentacaoUrl; // Link para ficheiros no OneDrive/Drive
+
+    private String contato;
+    // Email ou telemóvel
+    private String documentacao;
 
     @OneToMany(mappedBy = "equipa", cascade = CascadeType.ALL)
     private List<AtletaModel> atletas;

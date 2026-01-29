@@ -9,7 +9,9 @@ public class AtletaModel {
     private Long id;
 
     private String nome;
-    private String documento; // CC ou Passaporte
+
+    private String documento;
+
     private String fotoUrl;
 
     @ManyToOne
