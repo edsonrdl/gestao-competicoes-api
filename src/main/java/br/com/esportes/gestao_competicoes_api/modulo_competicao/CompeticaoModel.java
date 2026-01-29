@@ -30,7 +30,7 @@ public class CompeticaoModel {
     @Column(name = "data_inicio")
     private LocalDate dataInicio;
 
-    @Column(name = "datafim")
+    @Column(name = "data_fim")
     private LocalDate dataFim;
 
     @OneToMany(mappedBy = "competicao")
