@@ -39,8 +39,8 @@ public class CompeticaoModel {
     @Schema(description = "Data de término", example = "2026-03-30", type = "string")
     private LocalDate dataFim;
 
-    @OneToMany(mappedBy = "competicao")
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY) // Evita pedir modalidade na criação da competição
+    @OneToMany(mappedBy = "competicao", fetch = FetchType.LAZY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private List<ModalidadeModel> modalidades;
 
 }
