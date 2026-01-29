@@ -5,10 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/competicoes")
@@ -27,4 +24,21 @@ public class CompeticaoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(competicaoSalva);
 
     }
+
+    @GetMapping("/{idCompeticao}")
+    public ResponseEntity<CompeticaoModel> buscarCampeonatoPorId(@PathVariable Long idCompeticao) {
+        CompeticaoModel competicaoModel = competicaoService.buscarCompeticaoPorId(idCompeticao);
+        return ResponseEntity.ok(competicaoModel);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Atualizar competição", description = "Atualiza os dados de uma competição existente.")
+    public ResponseEntity<CompeticaoModel> atualizar(
+            @PathVariable Long id,
+            @RequestBody CompeticaoModel competicaoModel) {
+
+        CompeticaoModel competicaoAtualizada = competicaoService.atualizarCompeticao(id, competicaoModel);
+        return ResponseEntity.ok(competicaoAtualizada);
+    }
+
 }
