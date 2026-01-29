@@ -1,5 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_competicao;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,11 +21,13 @@ public class ModalidadeModel {
     private Long id;
 
     @Column(name="nome")
+    @Schema(description = "Nome da modalidade", example =  "Futsal Masculino", type = "string")
     private String nome;
 
     @ManyToOne
     @JoinColumn(name = "competicao_id")
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+    @JsonIgnore
     private CompeticaoModel competicao;
 
 }
