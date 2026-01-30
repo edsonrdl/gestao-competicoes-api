@@ -1,8 +1,7 @@
 package br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe;
 
 import br.com.esportes.gestao_competicoes_api.modulo_inscricao.atleta.AtletaModel;
-import br.com.esportes.gestao_competicoes_api.modulo_inscricao.ContatoModel;
-import br.com.esportes.gestao_competicoes_api.modulo_inscricao.InscricaoModel;
+import br.com.esportes.gestao_competicoes_api.modulo_inscricao.inscricao.InscricaoModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
