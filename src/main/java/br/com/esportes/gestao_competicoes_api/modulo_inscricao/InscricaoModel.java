@@ -1,6 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_inscricao;
 
-import br.com.esportes.gestao_competicoes_api.modulo_competicao.ModalidadeModel;
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
 import br.com.esportes.gestao_competicoes_api.modulo_sorteio.GrupoModel;
 import jakarta.persistence.*;
 
