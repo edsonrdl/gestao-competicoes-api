@@ -1,4 +1,4 @@
-package br.com.esportes.gestao_competicoes_api.modulo_inscricao;
+package br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
