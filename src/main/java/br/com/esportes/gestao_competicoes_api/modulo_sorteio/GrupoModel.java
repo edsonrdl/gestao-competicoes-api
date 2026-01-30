@@ -1,7 +1,7 @@
 package br.com.esportes.gestao_competicoes_api.modulo_sorteio;
 
 import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
-import br.com.esportes.gestao_competicoes_api.modulo_inscricao.InscricaoModel;
+import br.com.esportes.gestao_competicoes_api.modulo_inscricao.inscricao.InscricaoModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
