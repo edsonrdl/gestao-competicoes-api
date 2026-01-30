@@ -19,7 +19,7 @@ public class CampeonatoController {
     @PostMapping("/criar-campeonato")
     @Operation(summary = "Criar novo campeonato", description = "Perfil: Organizador (Comissão Técnica)/Cadastra um novo campeonato com suas datas e regulamento.")
     public ResponseEntity<CampeonatoModel> criarCampeonato(@Valid @RequestBody CampeonatoModel campeonatoModel){
-        CampeonatoModel competicaoSalva = campeonatoService.criarCompeticao(campeonatoModel);
+        CampeonatoModel competicaoSalva = campeonatoService.criarCampeonato(campeonatoModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(competicaoSalva);
 
     }
