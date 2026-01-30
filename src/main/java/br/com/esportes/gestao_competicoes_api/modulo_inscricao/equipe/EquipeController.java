@@ -1,5 +1,10 @@
 package br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +25,7 @@ public class EquipeController {
     }
 
     @PostMapping("/criar-equipe")
+    @Operation(summary = "1. Criar Equipe", description = "Cria a equipe e retorna o ID gerado. Use este ID para enviar a documentação depois.")
     public ResponseEntity<EquipeModel> criarEquipe(@RequestBody EquipeModel equipe) {
         return ResponseEntity.status(HttpStatus.CREATED).body(equipeService.salvarEquipe(equipe));
     }
@@ -45,15 +51,17 @@ public class EquipeController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{id}/atualizar-documentacao")
-    public ResponseEntity<String> enviarDocumento(
+    @PostMapping(value = "/{id}/documentacao", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "2. Upload do Documento/Logo", description = "Envia a foto para uma equipe já criada.")
+    public ResponseEntity<String> uploadDocumentacao(
             @PathVariable Long id,
             @RequestParam("arquivo") MultipartFile arquivo) {
+
         try {
             equipeService.atualizarDocumentacao(id, arquivo);
-            return ResponseEntity.ok("Documentação (foto) enviada com sucesso!");
+            return ResponseEntity.ok("Documentação enviada com sucesso!");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Erro ao enviar foto: " + e.getMessage());
         }
     }
 
