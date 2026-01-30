@@ -1,6 +1,7 @@
 package br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,12 @@ public class EquipeController {
             this.equipeService = equipeService;
     }
 
-    @PostMapping("/{id}/documentacao")
+    @PostMapping("/criar-equipe")
+    public ResponseEntity<EquipeModel> criarEquipe(@RequestBody EquipeModel equipe) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(equipeService.salvarEquipe(equipe));
+    }
+
+    @PostMapping("/{id}/atualizar-documentacao")
     public ResponseEntity<String> enviarDocumento(
             @PathVariable Long id,
             @RequestParam("arquivo") MultipartFile arquivo) {
@@ -29,8 +35,8 @@ public class EquipeController {
         }
     }
 
-    @GetMapping("/{id}/documentacao")
-    public ResponseEntity<byte[]> verDocumento(@PathVariable Long id) {
+    @GetMapping("/{id}/visualizar-documentacao")
+    public ResponseEntity<byte[]> visualizarDocumento(@PathVariable Long id) {
         EquipeModel equipe = equipeService.buscarEquipe(id);
 
 
