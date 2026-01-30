@@ -31,7 +31,6 @@ public class EquipeModel {
     @Column(name = "nome_responsavel")
     private String nomeResponsavel;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contato_id", referencedColumnName = "id")
     private ContatoModel contato;
