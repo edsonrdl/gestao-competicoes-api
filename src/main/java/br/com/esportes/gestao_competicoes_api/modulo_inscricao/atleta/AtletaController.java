@@ -59,7 +59,7 @@ public class AtletaController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping(value = "/{id}/foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/{id}/enviar-foto-atleta", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadFoto(@PathVariable Long id, @RequestParam("arquivo") MultipartFile arquivo) {
         try {
             atletaService.salvarFoto(id, arquivo);
@@ -77,6 +77,26 @@ public class AtletaController {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(atleta.getFotoTipo()))
                 .body(atleta.getFoto());
+    }
+    
+    @PostMapping(value = "/{idEquipe}/criar-atleta-com-foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "Criar Atleta com Foto", description = "Envia os dados do atleta (JSON) e a foto em uma única requisição.")
+    public ResponseEntity<AtletaModel> criarCompleto(
+            @PathVariable Long idEquipe,
+            @RequestPart("dados") AtletaModel atleta, // O JSON vem aqui dentro
+            @RequestPart(value = "arquivo", required = false) MultipartFile arquivo // A foto vem aqui
+    ) {
+        try {
+            AtletaModel novoAtleta = atletaService.criarAtletaVinculado(idEquipe, atleta);
+
+            if (arquivo != null && !arquivo.isEmpty()) {
+                atletaService.salvarFoto(novoAtleta.getId(), arquivo);
+            }
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(novoAtleta);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }
