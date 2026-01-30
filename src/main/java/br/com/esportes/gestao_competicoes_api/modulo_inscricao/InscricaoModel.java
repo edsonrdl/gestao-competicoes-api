@@ -32,7 +32,6 @@ public class InscricaoModel {
     @Column(nullable = false)
     private boolean cabecaDeChave = false;
 
-
     @ManyToOne
     @JoinColumn(name = "equipe_id", nullable = false)
     @JsonIgnoreProperties("historicoParticipacoes")
