@@ -1,6 +1,7 @@
 package br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato;
 
 
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -8,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/competicoes")
+@RequestMapping("/campeonato")
 public class CampeonatoController {
 
     private CampeonatoService competicaoService;
@@ -17,28 +18,33 @@ public class CampeonatoController {
         this.competicaoService = competicaoService;
     }
 
-    @PostMapping("/salvar-competicao")
-    @Operation(summary = "Criar nova competição", description = "Cadastra um novo campeonato com suas datas e regulamento.")
-    public ResponseEntity<CampeonatoModel> salvarCompeticao(@Valid @RequestBody CampeonatoModel competicaoModel){
-        CampeonatoModel competicaoSalva = competicaoService.salvarCompeticao(competicaoModel);
+    @PostMapping("/criar-campeonato")
+    @Operation(summary = "Criar novo campeonato", description = "Cadastra um novo campeonato com suas datas e regulamento.")
+    public ResponseEntity<CampeonatoModel> criarCompeticao(@Valid @RequestBody CampeonatoModel competicaoModel){
+        CampeonatoModel competicaoSalva = competicaoService.criarCompeticao(competicaoModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(competicaoSalva);
 
     }
 
-    @GetMapping("/{idCompeticao}")
-    public ResponseEntity<CampeonatoModel> buscarCampeonatoPorId(@PathVariable Long idCompeticao) {
-        CampeonatoModel competicaoModel = competicaoService.buscarCompeticaoPorId(idCompeticao);
+    @GetMapping("/buscar-campeonato-por-id/{idCampeonato}")
+    public ResponseEntity<CampeonatoModel> buscarCampeonatoPorId(@PathVariable Long idCampeonato) {
+        CampeonatoModel competicaoModel = competicaoService.buscarCompeticaoPorId(idCampeonato);
         return ResponseEntity.ok(competicaoModel);
     }
 
-    @PutMapping("/{id}")
-    @Operation(summary = "Atualizar competição", description = "Atualiza os dados de uma competição existente.")
+    @PutMapping("/atualizar-campeonato/{id}")
+    @Operation(summary = "Atualizar campeonato", description = "Atualiza os dados de uma campeonato existente.")
     public ResponseEntity<CampeonatoModel> atualizarCamp(
             @PathVariable Long id,
             @RequestBody CampeonatoModel competicaoModel) {
 
-        CampeonatoModel competicaoAtualizada = competicaoService.atualizarCompeticao(id, competicaoModel);
+        CampeonatoModel competicaoAtualizada = competicaoService.atualizarCampeonato(id, competicaoModel);
         return ResponseEntity.ok(competicaoAtualizada);
     }
 
+    @DeleteMapping("/deletar-campeonato/{idCampeonato}")
+    public ResponseEntity<Void> deletarModalidade(@PathVariable Long idCampeonato) {
+        competicaoService.deletarCampeonatoPorId(idCampeonato);
+        return ResponseEntity.noContent().build();
+    }
 }
