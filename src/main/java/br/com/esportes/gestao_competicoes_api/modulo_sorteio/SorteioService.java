@@ -2,10 +2,9 @@ package br.com.esportes.gestao_competicoes_api.modulo_sorteio;
 
 import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
 import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeRepository; // <--- IMPORT NOVO
-import br.com.esportes.gestao_competicoes_api.modulo_inscricao.InscricaoModel;
-import br.com.esportes.gestao_competicoes_api.modulo_inscricao.InscricaoRepository;
+import br.com.esportes.gestao_competicoes_api.modulo_inscricao.inscricao.InscricaoModel;
+import br.com.esportes.gestao_competicoes_api.modulo_inscricao.inscricao.InscricaoRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
