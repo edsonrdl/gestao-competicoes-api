@@ -16,12 +16,22 @@ public class ModalidadeService {
         this.competicaoRepository = competicaoRepository;
     }
 
-    public ModalidadeModel salvarModalidade(Long idCompeticao, ModalidadeModel modalidade) {
+    public ModalidadeModel criarModalidade(Long idCompeticao, ModalidadeModel modalidade) {
         CampeonatoModel campeonato = competicaoRepository.findById(idCompeticao)
-                .orElseThrow(() -> new RuntimeException("Campeonato não encontrada!"));
+                .orElseThrow(() -> new RuntimeException("Campeonato não encontrado!"));
 
         modalidade.setCampeonato(campeonato);
 
         return modalidadeRepository.save(modalidade);
+    }
+
+    public ModalidadeModel buscarModalidadePorId(Long id) {
+        return modalidadeRepository.findById(id).orElseThrow();
+    }
+
+    public void deletarModalidadePorId(Long id) {
+        ModalidadeModel modalidade = modalidadeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Modalidade não encontrada para exclusão."));
+        modalidadeRepository.delete(modalidade);
     }
 }
