@@ -1,6 +1,5 @@
-package br.com.esportes.gestao_competicoes_api.modulo_inscricao;
+package br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
