@@ -1,4 +1,4 @@
-package br.com.esportes.gestao_competicoes_api.modulo_campeonato;
+package br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato;
 
 
 import io.swagger.v3.oas.annotations.Operation;
