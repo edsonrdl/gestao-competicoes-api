@@ -1,6 +1,5 @@
 package br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato;
 
-import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
 import org.springframework.stereotype.Service;
 
 @Service
