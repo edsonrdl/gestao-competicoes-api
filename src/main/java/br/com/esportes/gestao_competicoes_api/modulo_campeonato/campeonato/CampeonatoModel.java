@@ -1,5 +1,6 @@
-package br.com.esportes.gestao_competicoes_api.modulo_campeonato;
+package br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato;
 
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
 import io.swagger.v3.oas.annotations.media.Schema; // <--- IMPORTANTE
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
