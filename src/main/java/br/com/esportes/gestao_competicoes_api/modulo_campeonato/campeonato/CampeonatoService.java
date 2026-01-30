@@ -5,22 +5,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class CampeonatoService {
 
-    private  final CampeonatoRepository competicaoRepository;
+    private  final CampeonatoRepository campeonatoRepository;
 
-    public CampeonatoService(CampeonatoRepository competicaoRepository) {
-        this.competicaoRepository = competicaoRepository;
+    public CampeonatoService(CampeonatoRepository campeonatoRepository) {
+        this.campeonatoRepository = campeonatoRepository;
     }
 
     public CampeonatoModel criarCompeticao(CampeonatoModel competicaoModel) {
-        return competicaoRepository.save(competicaoModel);
+        return campeonatoRepository.save(competicaoModel);
     }
     public CampeonatoModel buscarCompeticaoPorId(Long idCompeticao) {
-        return competicaoRepository.findById(idCompeticao)
+        return campeonatoRepository.findById(idCompeticao)
                 .orElseThrow(() -> new RuntimeException("Competição não encontrada!"));
     }
 
     public CampeonatoModel atualizarCampeonato(Long idCompeticao, CampeonatoModel competicaoNovosDados) {
-        CampeonatoModel competicaoExistente = competicaoRepository.findById(idCompeticao)
+        CampeonatoModel competicaoExistente = campeonatoRepository.findById(idCompeticao)
                 .orElseThrow(() -> new RuntimeException("Competição não encontrada com ID: " + idCompeticao));
 
         competicaoExistente.setNome(competicaoNovosDados.getNome());
@@ -28,12 +28,12 @@ public class CampeonatoService {
         competicaoExistente.setDataInicio(competicaoNovosDados.getDataInicio());
         competicaoExistente.setDataFim(competicaoNovosDados.getDataFim());
 
-        return competicaoRepository.save(competicaoExistente);
+        return campeonatoRepository.save(competicaoExistente);
     }
     public void deletarCampeonatoPorId(Long id) {
-        CampeonatoModel CampeonatoModel =  competicaoRepository.findById(id)
+        CampeonatoModel CampeonatoModel =  campeonatoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Campeonato não encontrada para exclusão."));
 
-        competicaoRepository.delete(CampeonatoModel);
+        campeonatoRepository.delete(CampeonatoModel);
     }
 }
