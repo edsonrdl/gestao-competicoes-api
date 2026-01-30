@@ -1,6 +1,5 @@
-package br.com.esportes.gestao_competicoes_api.modulo_inscricao;
+package br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,7 +31,6 @@ public class EquipeService {
         equipeRepository.save(equipe);
     }
 
-    // Método auxiliar para recuperar a imagem depois
     public EquipeModel buscarEquipe(Long id) {
         return equipeRepository.findById(id).orElseThrow();
     }
