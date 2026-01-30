@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "grupo") // Define o nome da tabela no banco
+@Table(name = "grupo")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,14 +29,16 @@ public class GrupoModel {
 
     @ManyToOne
     @JoinColumn(name = "modalidade_id", nullable = false)
+
     @JsonIgnoreProperties({"grupos", "inscricoes", "competicao"})
     private ModalidadeModel modalidade;
 
-    @Column(columnDefinition = "TEXT")
+
+    @Column(name = "log_auditoria", columnDefinition = "TEXT")
     private String logAuditoriaSorteio;
 
 
     @OneToMany(mappedBy = "grupo", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("grupo")
+    @JsonIgnoreProperties({"grupo", "modalidade", "historicoParticipacoes"})
     private List<InscricaoModel> equipasDoGrupo = new ArrayList<>();
 }
