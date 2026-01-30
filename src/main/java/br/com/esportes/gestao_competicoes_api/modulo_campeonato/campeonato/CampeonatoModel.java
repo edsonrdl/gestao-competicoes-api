@@ -1,4 +1,4 @@
-package br.com.esportes.gestao_competicoes_api.modulo_competicao;
+package br.com.esportes.gestao_competicoes_api.modulo_campeonato;
 
 import io.swagger.v3.oas.annotations.media.Schema; // <--- IMPORTANTE
 import jakarta.persistence.*;
@@ -15,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "competicao")
-public class CompeticaoModel {
+@Table(name = "campeonato")
+public class CampeonatoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +39,7 @@ public class CompeticaoModel {
     @Schema(description = "Data de término", example = "2026-03-30", type = "string")
     private LocalDate dataFim;
 
-    @OneToMany(mappedBy = "competicao", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "campeonato", fetch = FetchType.LAZY)
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private List<ModalidadeModel> modalidades;
 

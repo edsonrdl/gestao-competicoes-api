@@ -1,26 +1,26 @@
-package br.com.esportes.gestao_competicoes_api.modulo_competicao;
+package br.com.esportes.gestao_competicoes_api.modulo_campeonato;
 
 import org.springframework.stereotype.Service;
 
 @Service
-public class CompeticaoService {
+public class CampeonatoService {
 
-    private  final CompeticaoRepository competicaoRepository;
+    private  final CampeonatoRepository competicaoRepository;
 
-    public CompeticaoService(CompeticaoRepository competicaoRepository) {
+    public CampeonatoService(CampeonatoRepository competicaoRepository) {
         this.competicaoRepository = competicaoRepository;
     }
 
-    public CompeticaoModel salvarCompeticao(CompeticaoModel competicaoModel) {
+    public CampeonatoModel salvarCompeticao(CampeonatoModel competicaoModel) {
         return competicaoRepository.save(competicaoModel);
     }
-    public CompeticaoModel buscarCompeticaoPorId(Long idCompeticao) {
+    public CampeonatoModel buscarCompeticaoPorId(Long idCompeticao) {
         return competicaoRepository.findById(idCompeticao)
                 .orElseThrow(() -> new RuntimeException("Competição não encontrada!"));
     }
 
-    public CompeticaoModel atualizarCompeticao(Long idCompeticao, CompeticaoModel competicaoNovosDados) {
-        CompeticaoModel competicaoExistente = competicaoRepository.findById(idCompeticao)
+    public CampeonatoModel atualizarCompeticao(Long idCompeticao, CampeonatoModel competicaoNovosDados) {
+        CampeonatoModel competicaoExistente = competicaoRepository.findById(idCompeticao)
                 .orElseThrow(() -> new RuntimeException("Competição não encontrada com ID: " + idCompeticao));
 
         competicaoExistente.setNome(competicaoNovosDados.getNome());

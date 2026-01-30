@@ -1,4 +1,4 @@
-package br.com.esportes.gestao_competicoes_api.modulo_competicao;
+package br.com.esportes.gestao_competicoes_api.modulo_campeonato;
 
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

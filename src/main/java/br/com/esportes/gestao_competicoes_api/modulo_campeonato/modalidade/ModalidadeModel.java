@@ -1,4 +1,4 @@
-package br.com.esportes.gestao_competicoes_api.modulo_competicao;
+package br.com.esportes.gestao_competicoes_api.modulo_campeonato;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,9 +25,9 @@ public class ModalidadeModel {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "competicao_id")
+    @JoinColumn(name = "campeonato_id")
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     @JsonIgnore
-    private CompeticaoModel competicao;
+    private CampeonatoModel campeonato;
 
 }
