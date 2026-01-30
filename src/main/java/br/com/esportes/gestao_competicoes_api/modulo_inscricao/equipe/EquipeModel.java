@@ -1,6 +1,8 @@
-package br.com.esportes.gestao_competicoes_api.modulo_inscricao;
+package br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe;
 
 import br.com.esportes.gestao_competicoes_api.modulo_inscricao.AtletaModel;
+import br.com.esportes.gestao_competicoes_api.modulo_inscricao.ContatoModel;
+import br.com.esportes.gestao_competicoes_api.modulo_inscricao.InscricaoModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,17 +38,16 @@ public class EquipeModel {
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name = "doc_conteudo", length = 10000000) // 10MB
+    @Column(name = "doc_conteudo", length = 10000000)
     private byte[] documentacao;
 
-    @Column(name = "doc_tipo") // Ex: "image/png"
+    @Column(name = "doc_tipo")
     private String documentacaoTipo;
 
 
     @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("equipe")
     private List<InscricaoModel> historicoParticipacoes = new ArrayList<>();
-
 
     @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("equipe")
