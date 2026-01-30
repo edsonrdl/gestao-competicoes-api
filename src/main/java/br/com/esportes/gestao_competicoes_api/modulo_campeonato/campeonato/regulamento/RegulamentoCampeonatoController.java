@@ -35,18 +35,19 @@ public class RegulamentoCampeonatoController {
         return ResponseEntity.ok(regulamentoCampeonatoModel);
     }
 
-    @PutMapping("/{idRegra}")
-    @Operation(summary = "Atualizar Regra", description = "Altera o texto da regra. Não permite trocar de campeonato.")
-    public ResponseEntity<RegulamentoCampeonatoModel> atualizarRegra(
-            @PathVariable Long idRegra,
-            @RequestBody RegulamentoCampeonatoModel regra) {
+    @PutMapping("/{idRegulamento}")
+    @Operation(summary = "Atualizar Regra", description = "Perfil: Organizador (Comissão Técnica)/Altera regulamento.")
+    public ResponseEntity<RegulamentoCampeonatoModel> atualizarRegulamentoCampeonato(
+            @PathVariable Long idRegulamento,
+            @RequestBody RegulamentoCampeonatoModel regulamentoCampeonatoModel) {
 
-        return ResponseEntity.ok(regulamentoCampeonatoService.atualizarRegulamentoCampeonato(idRegra, regra));
+        return ResponseEntity.ok(regulamentoCampeonatoService.atualizarRegulamentoCampeonato(idRegulamento, regulamentoCampeonatoModel));
     }
 
-    @DeleteMapping("/{idRegra}")
-    public ResponseEntity<Void> deletarRegra(@PathVariable Long idRegra) {
-        regulamentoCampeonatoService.deletarRegra(idRegra);
+    @DeleteMapping("/{idRegulamento}")
+    @Operation(summary = "Deletar regulamento", description = "Perfil: Organizador (Comissão Técnica)/Deletar o regulamento pelo id do regulamento.")
+    public ResponseEntity<Void> deletarRegra(@PathVariable Long idRegulamento) {
+        regulamentoCampeonatoService.deletarRegra(idRegulamento);
         return ResponseEntity.noContent().build();
     }
 }
