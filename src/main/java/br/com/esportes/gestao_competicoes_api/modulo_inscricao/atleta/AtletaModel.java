@@ -23,8 +23,9 @@ public class AtletaModel {
     @Schema(example = "Neymar Jr")
     private String nome;
 
-    @Schema(example = "123.456.789-00")
-    private String documento;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "atleta_documento_id", referencedColumnName = "id")
+    private AtletaDocumentoModel atletaDocumentoModel;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -35,16 +36,6 @@ public class AtletaModel {
     @Column(name = "foto_tipo")
     @JsonIgnore
     private String fotoTipo;
-
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    @Column(name = "doc_imagem_dados", length = 10000000)
-    @JsonIgnore
-    private byte[] documentoImagem;
-
-    @Column(name = "doc_imagem_tipo")
-    @JsonIgnore
-    private String documentoImagemTipo;
 
     @ManyToOne
     @JoinColumn(name = "equipe_id")
