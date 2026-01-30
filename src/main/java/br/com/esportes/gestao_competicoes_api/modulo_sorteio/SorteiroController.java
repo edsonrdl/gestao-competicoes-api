@@ -1,6 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_sorteio;
 
-import br.com.esportes.gestao_competicoes_api.modulo_inscricao.InscricaoRepository;
+import br.com.esportes.gestao_competicoes_api.modulo_inscricao.inscricao.InscricaoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
