@@ -1,5 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_inscricao;
 
+import br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe.EquipeModel;
 import jakarta.persistence.*;
 
 @Entity
@@ -18,5 +19,5 @@ public class AtletaModel {
     @JoinColumn(name = "equipa_id")
     private EquipeModel equipa;
 
-    // Getters e Setters
+
 }
