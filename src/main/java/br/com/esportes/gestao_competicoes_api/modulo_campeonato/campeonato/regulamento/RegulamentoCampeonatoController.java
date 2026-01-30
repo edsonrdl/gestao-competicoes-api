@@ -1,5 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato.regulamento;
 
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato.CampeonatoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,25 +12,27 @@ import java.util.List;
 @RequestMapping("/regulamento-campeonato")
 public class RegulamentoCampeonatoController {
 
-    private final RegulamentoCampeonatoService service;
+    private final RegulamentoCampeonatoService regulamentoCampeonatoService;
 
-    public RegulamentoCampeonatoController(RegulamentoCampeonatoService service) {
-        this.service = service;
+    public RegulamentoCampeonatoController(RegulamentoCampeonatoService regulamentoCampeonatoService) {
+        this.regulamentoCampeonatoService = regulamentoCampeonatoService;
     }
 
-    @PostMapping("/{idCampeonato}/adicionar-regra")
-    @Operation(summary = "Adicionar Regra ao Campeonato", description = "Adiciona um artigo ou cláusula ao regulamento de um campeonato existente.")
-    public ResponseEntity<RegulamentoCampeonatoModel> adicionarRegra(
+    @PostMapping("/{idCampeonato}/adicionar-regulamento-campeonato")
+    @Operation(summary = "Adicionar Regra ao Campeonato", description = "Perfil: Organizador (Comissão Técnica)/Adiciona um artigo ou cláusula ao regulamento de um campeonato existente.")
+    public ResponseEntity<RegulamentoCampeonatoModel> adicionarRegulamentoCampeonato(
             @PathVariable Long idCampeonato,
             @RequestBody RegulamentoCampeonatoModel regra) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(service.adicionarRegra(idCampeonato, regra));
+                .body(regulamentoCampeonatoService.adicionarRegulamentoCampeonato(idCampeonato, regra));
     }
 
-    @GetMapping
-    public ResponseEntity<List<RegulamentoCampeonatoModel>> listarTodas() {
-        return ResponseEntity.ok(service.listarRegras());
+    @GetMapping("/buscar-regulamento-por-id/{idRegulamentoCampeonato}")
+    @Operation(summary = "Buscar regulamento", description = "Perfil: Organizador (Comissão Técnica)/Buscar informações do regulamento pelo id do regulamento.")
+    public ResponseEntity<RegulamentoCampeonatoModel> buscarCampeonatoPorId(@PathVariable Long idRegulamentoCampeonato) {
+        RegulamentoCampeonatoModel regulamentoCampeonatoModel = regulamentoCampeonatoService.buscarRegulamentoCampeonato(idRegulamentoCampeonato);
+        return ResponseEntity.ok(regulamentoCampeonatoModel);
     }
 
     @PutMapping("/{idRegra}")
@@ -38,12 +41,12 @@ public class RegulamentoCampeonatoController {
             @PathVariable Long idRegra,
             @RequestBody RegulamentoCampeonatoModel regra) {
 
-        return ResponseEntity.ok(service.atualizarRegulamentoCampeonato(idRegra, regra));
+        return ResponseEntity.ok(regulamentoCampeonatoService.atualizarRegulamentoCampeonato(idRegra, regra));
     }
 
     @DeleteMapping("/{idRegra}")
     public ResponseEntity<Void> deletarRegra(@PathVariable Long idRegra) {
-        service.deletarRegra(idRegra);
+        regulamentoCampeonatoService.deletarRegra(idRegra);
         return ResponseEntity.noContent().build();
     }
 }
