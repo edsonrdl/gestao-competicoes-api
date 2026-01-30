@@ -1,4 +1,4 @@
-package br.com.esportes.gestao_competicoes_api.modulo_inscricao;
+package br.com.esportes.gestao_competicoes_api.modulo_inscricao.atleta;
 
 import br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe.EquipeModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,7 +25,7 @@ public class AtletaModel {
 
     @Schema(example = "123.456.789-00")
     private String documento;
-    
+
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "foto_dados", length = 10000000)
