@@ -1,5 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,16 @@ public class ModalidadeController {
     public ResponseEntity<ModalidadeModel> buscarModalidadePorId(@PathVariable Long idCampeonato) {
         ModalidadeModel modalidadeModel=modalidadeService.buscarModalidadePorId(idCampeonato);
         return ResponseEntity.status(HttpStatus.OK).body(modalidadeModel);
+    }
+
+    @PutMapping("/atualizar-modalidade/{idModalidade}")
+    @Operation(summary = "Atualizar modalidade", description = "Perfil usado:      /Atualiza os dados de uma modalidade existente pelo  pelo id da modalidade.")
+    public ResponseEntity<ModalidadeModel> atualizarModalidade(
+            @PathVariable Long idModalidade,
+            @RequestBody ModalidadeModel modalidadeModel) {
+
+        ModalidadeModel modalidadeAtualizada = modalidadeService.atualizarModalidade(idModalidade, modalidadeModel);
+        return ResponseEntity.ok(modalidadeAtualizada);
     }
 
     @DeleteMapping("/deletar-modalidade/{idModalidedade}")
