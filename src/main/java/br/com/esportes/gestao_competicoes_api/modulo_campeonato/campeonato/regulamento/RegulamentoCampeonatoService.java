@@ -19,7 +19,7 @@ public class RegulamentoCampeonatoService {
         this.campeonatoRepository = campeonatoRepository;
     }
 
-    public RegulamentoCampeonatoModel adicionarRegra(Long idCampeonato, RegulamentoCampeonatoModel regra) {
+    public RegulamentoCampeonatoModel adicionarRegulamentoCampeonato(Long idCampeonato, RegulamentoCampeonatoModel regra) {
         CampeonatoModel campeonato = campeonatoRepository.findById(idCampeonato)
                 .orElseThrow(() -> new RuntimeException("Campeonato não encontrado com ID: " + idCampeonato));
 
@@ -27,8 +27,9 @@ public class RegulamentoCampeonatoService {
         return regulamentoRepository.save(regra);
     }
 
-    public List<RegulamentoCampeonatoModel> listarRegras() {
-        return regulamentoRepository.findAll();
+    public RegulamentoCampeonatoModel buscarRegulamentoCampeonato(Long idRegulamentoCampeonato) {
+        return regulamentoRepository.findById(idRegulamentoCampeonato)
+                .orElseThrow(() -> new RuntimeException("Regulamento não encontrada!"));
     }
 
     public RegulamentoCampeonatoModel atualizarRegulamentoCampeonato(Long idRegra, RegulamentoCampeonatoModel novosDados) {
