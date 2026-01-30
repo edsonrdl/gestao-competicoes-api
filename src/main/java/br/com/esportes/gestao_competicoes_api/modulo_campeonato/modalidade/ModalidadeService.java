@@ -29,6 +29,16 @@ public class ModalidadeService {
         return modalidadeRepository.findById(id).orElseThrow();
     }
 
+    public ModalidadeModel atualizarModalidade(Long idModalidade, ModalidadeModel modalidadeModelUpdate) {
+        ModalidadeModel modalidadeModel = modalidadeRepository.findById(idModalidade)
+                .orElseThrow(() -> new RuntimeException("Modalidade não encontrada com ID: " + idModalidade));
+
+        modalidadeModel.setNome(modalidadeModelUpdate.getNome());
+        modalidadeModel.setCampeonato(modalidadeModelUpdate.getCampeonato());
+
+        return modalidadeRepository.save(modalidadeModel);
+    }
+
     public void deletarModalidadePorId(Long id) {
         ModalidadeModel modalidade = modalidadeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Modalidade não encontrada para exclusão."));
