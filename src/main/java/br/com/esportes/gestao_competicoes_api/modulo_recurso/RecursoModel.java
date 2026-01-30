@@ -1,6 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_recurso;
 
-import br.com.esportes.gestao_competicoes_api.modulo_competicao.CompeticaoModel;
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato.CampeonatoModel;
 import br.com.esportes.gestao_competicoes_api.modulo_inscricao.EquipeModel;
 import jakarta.persistence.*;
 
@@ -30,6 +30,6 @@ public class RecursoModel {
 
     @ManyToOne
     @JoinColumn(name = "competicao_id")
-    private CompeticaoModel competicao;
+    private CampeonatoModel competicao;
 }
 
