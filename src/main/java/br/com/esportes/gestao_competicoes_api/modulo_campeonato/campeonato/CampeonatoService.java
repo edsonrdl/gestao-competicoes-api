@@ -1,5 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato;
 
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,7 +12,7 @@ public class CampeonatoService {
         this.competicaoRepository = competicaoRepository;
     }
 
-    public CampeonatoModel salvarCompeticao(CampeonatoModel competicaoModel) {
+    public CampeonatoModel criarCompeticao(CampeonatoModel competicaoModel) {
         return competicaoRepository.save(competicaoModel);
     }
     public CampeonatoModel buscarCompeticaoPorId(Long idCompeticao) {
@@ -19,7 +20,7 @@ public class CampeonatoService {
                 .orElseThrow(() -> new RuntimeException("Competição não encontrada!"));
     }
 
-    public CampeonatoModel atualizarCompeticao(Long idCompeticao, CampeonatoModel competicaoNovosDados) {
+    public CampeonatoModel atualizarCampeonato(Long idCompeticao, CampeonatoModel competicaoNovosDados) {
         CampeonatoModel competicaoExistente = competicaoRepository.findById(idCompeticao)
                 .orElseThrow(() -> new RuntimeException("Competição não encontrada com ID: " + idCompeticao));
 
@@ -29,5 +30,11 @@ public class CampeonatoService {
         competicaoExistente.setDataFim(competicaoNovosDados.getDataFim());
 
         return competicaoRepository.save(competicaoExistente);
+    }
+    public void deletarCampeonatoPorId(Long id) {
+        CampeonatoModel CampeonatoModel =  competicaoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Campeonato não encontrada para exclusão."));
+
+        competicaoRepository.delete(CampeonatoModel);
     }
 }
