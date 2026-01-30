@@ -14,7 +14,10 @@ public class EquipeService {
     public EquipeService(EquipeRepository equipeRepository) {
         this.equipeRepository = equipeRepository;
     }
+    public EquipeModel salvarEquipe(EquipeModel equipe) {
 
+        return equipeRepository.save(equipe);
+    }
     public void atualizarDocumentacao(Long idEquipe, MultipartFile arquivo) throws IOException {
         EquipeModel equipe = equipeRepository.findById(idEquipe)
                 .orElseThrow(() -> new RuntimeException("Equipe não encontrada"));
