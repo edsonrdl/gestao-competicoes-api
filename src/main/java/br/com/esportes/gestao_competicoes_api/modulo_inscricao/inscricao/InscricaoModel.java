@@ -1,4 +1,4 @@
-package br.com.esportes.gestao_competicoes_api.modulo_inscricao;
+package br.com.esportes.gestao_competicoes_api.modulo_inscricao.inscricao;
 
 import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
 import br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe.EquipeModel;
