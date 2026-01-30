@@ -11,9 +11,10 @@ public class CampeonatoService {
         this.campeonatoRepository = campeonatoRepository;
     }
 
-    public CampeonatoModel criarCompeticao(CampeonatoModel competicaoModel) {
-        return campeonatoRepository.save(competicaoModel);
+    public CampeonatoModel criarCampeonato(CampeonatoModel campeonatoModel) {
+        return campeonatoRepository.save(campeonatoModel);
     }
+
     public CampeonatoModel buscarCompeticaoPorId(Long idCompeticao) {
         return campeonatoRepository.findById(idCompeticao)
                 .orElseThrow(() -> new RuntimeException("Competição não encontrada!"));
@@ -24,12 +25,13 @@ public class CampeonatoService {
                 .orElseThrow(() -> new RuntimeException("Competição não encontrada com ID: " + idCompeticao));
 
         competicaoExistente.setNome(competicaoNovosDados.getNome());
-        competicaoExistente.setRegulamento(competicaoNovosDados.getRegulamento());
+        competicaoExistente.setRegulamentos(competicaoNovosDados.getRegulamentos());
         competicaoExistente.setDataInicio(competicaoNovosDados.getDataInicio());
         competicaoExistente.setDataFim(competicaoNovosDados.getDataFim());
 
         return campeonatoRepository.save(competicaoExistente);
     }
+
     public void deletarCampeonatoPorId(Long id) {
         CampeonatoModel CampeonatoModel =  campeonatoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Campeonato não encontrada para exclusão."));
