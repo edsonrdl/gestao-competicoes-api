@@ -1,5 +1,6 @@
-package br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade;
+package br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.regulamento;
 
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
