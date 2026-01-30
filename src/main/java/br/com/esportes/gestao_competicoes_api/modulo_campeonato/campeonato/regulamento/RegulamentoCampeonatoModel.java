@@ -1,12 +1,13 @@
-package br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato;
+package br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato.regulamento;
 
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato.CampeonatoModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "regulamento-campeonato")
+@Table(name = "regulamento_campeonato")
 @Getter
 @Setter
 @AllArgsConstructor
