@@ -1,7 +1,7 @@
 package br.com.esportes.gestao_competicoes_api.modulo_recurso;
 
 import br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato.CampeonatoModel;
-import br.com.esportes.gestao_competicoes_api.modulo_inscricao.EquipeModel;
+import br.com.esportes.gestao_competicoes_api.modulo_inscricao.equipe.EquipeModel;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -22,6 +22,7 @@ public class RecursoModel {
     private String parecerComissao;
 
     private LocalDateTime dataSolicitacao;
+
     private LocalDateTime dataAnalise;
 
     @ManyToOne
