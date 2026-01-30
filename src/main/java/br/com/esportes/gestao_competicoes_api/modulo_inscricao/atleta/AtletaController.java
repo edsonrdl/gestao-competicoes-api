@@ -1,5 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_inscricao.atleta;
 
+
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -7,16 +8,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/atletas")
 public class AtletaController {
 
-     private AtletaService atletaService;
+    private final AtletaService atletaService;
 
-     public AtletaController (AtletaService atletaService) {
+    public AtletaController(AtletaService atletaService) {
         this.atletaService = atletaService;
-     }
-
+    }
 
     @PostMapping("/{idEquipe}/criar-atleta")
     @Operation(summary = "Criar Atleta na Equipe", description = "Cria um atleta já vinculado à equipe informada na URL.")
@@ -32,13 +34,14 @@ public class AtletaController {
     public ResponseEntity<AtletaModel> atualizar(@PathVariable Long id, @RequestBody AtletaModel novosDados) {
         AtletaModel atleta = atletaService.buscar(id);
         atleta.setNome(novosDados.getNome());
-        atleta.setDocumento(novosDados.getDocumento());
+        atleta.setAtletaDocumentoModel(novosDados.getAtletaDocumentoModel());
 
-        if(novosDados.getEquipe() != null) atleta.setEquipe(novosDados.getEquipe());
+        if (novosDados.getEquipe() != null) {
+            atleta.setEquipe(novosDados.getEquipe());
+        }
 
         return ResponseEntity.ok(atletaService.salvar(atleta));
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<AtletaModel> buscar(@PathVariable Long id) {
@@ -50,13 +53,11 @@ public class AtletaController {
         return ResponseEntity.ok(atletaService.listar());
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         atletaService.deletar(id);
         return ResponseEntity.noContent().build();
     }
-
 
     @PostMapping(value = "/{id}/foto", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadFoto(@PathVariable Long id, @RequestParam("arquivo") MultipartFile arquivo) {
@@ -68,31 +69,14 @@ public class AtletaController {
         }
     }
 
-    @GetMapping("/{id}/foto")
-    public ResponseEntity<byte[]> verFoto(@PathVariable Long id) {
+    @GetMapping("/{id}/visualizar-foto-atleta")
+    public ResponseEntity<byte[]> verFotoAtleta(@PathVariable Long id) {
         AtletaModel atleta = atletaService.buscar(id);
         if (atleta.getFoto() == null) return ResponseEntity.notFound().build();
+
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(atleta.getFotoTipo()))
                 .body(atleta.getFoto());
     }
 
-    @PostMapping(value = "/{id}/documento-imagem", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> uploadDoc(@PathVariable Long id, @RequestParam("arquivo") MultipartFile arquivo) {
-        try {
-            atletaService.salvarDocImagem(id, arquivo);
-            return ResponseEntity.ok("Documento salvo!");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro: " + e.getMessage());
-        }
-    }
-
-    @GetMapping("/{id}/visualizar-documento")
-    public ResponseEntity<byte[]> verDocumento(@PathVariable Long id) {
-        AtletaModel atletaModel = atletaService.buscar(id);
-        if (atletaModel.getDocumentoImagem() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(atletaModel.getDocumentoImagemTipo()))
-                .body(atletaModel.getDocumentoImagem());
-    }
 }
