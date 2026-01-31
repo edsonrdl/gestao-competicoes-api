@@ -35,9 +35,9 @@ public class CampeonatoController {
     @Operation(summary = "Atualizar campeonato", description = "Perfil: Organizador (Comissão Técnica)/Atualiza os dados de uma campeonato existente pelo id do campeonato.")
     public ResponseEntity<CampeonatoModel> atualizarCampeonato(
             @PathVariable Long idCampeonato,
-            @RequestBody CampeonatoModel campeonatoModel) {
+            @RequestBody CampeonatoRequestDTO campeonatoRequestDTO) {
 
-        CampeonatoModel competicaoAtualizada = campeonatoService.atualizarCampeonato(idCampeonato, campeonatoModel);
+        CampeonatoModel competicaoAtualizada = campeonatoService.atualizarCampeonato(idCampeonato, campeonatoRequestDTO);
         return ResponseEntity.ok(competicaoAtualizada);
     }
 
