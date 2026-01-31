@@ -31,7 +31,7 @@ public class RecursoModel {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @Schema(description = "Status atual do processo", example = "PENDENTE")
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private StatusRecursoEnum status = StatusRecursoEnum.PENDENTE;
 
     @Column(name = "data_solicitacao", nullable = false)
@@ -47,10 +47,12 @@ public class RecursoModel {
     @ManyToOne
     @JoinColumn(name = "equipe_id", nullable = false)
     @JsonIgnoreProperties({"atletas", "historicoParticipacoes", "documentacao", "contato"})
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private EquipeModel equipeSolicitante;
 
     @ManyToOne
     @JoinColumn(name = "campeonato_id", nullable = false)
     @JsonIgnoreProperties({"modalidades", "regulamento", "tabelaJogos"})
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private CampeonatoModel campeonato;
 }
