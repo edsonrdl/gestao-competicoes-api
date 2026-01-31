@@ -40,5 +40,5 @@ public class GrupoModel {
 
     @OneToMany(mappedBy = "grupo", fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"grupo", "modalidade", "historicoParticipacoes"})
-    private List<InscricaoModel> equipasDoGrupo = new ArrayList<>();
+    private List<InscricaoModel> equipesDoGrupo = new ArrayList<>();
 }

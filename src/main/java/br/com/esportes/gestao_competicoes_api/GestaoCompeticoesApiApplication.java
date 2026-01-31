@@ -11,6 +11,4 @@ public class GestaoCompeticoesApiApplication {
 		System.out.println("A aplicação foi iniciada com sucesso!");
 	}
 
-
-
 }

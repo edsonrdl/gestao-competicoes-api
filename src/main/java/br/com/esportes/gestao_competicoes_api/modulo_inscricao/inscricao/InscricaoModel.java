@@ -24,17 +24,19 @@ public class InscricaoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+   
+    @Column(name = "data_nscricao")
     private LocalDate dataInscricao = LocalDate.now();
 
     private String status = "PENDENTE";
 
-    @Column(nullable = false)
+ 
+    @Column(name = "cabeca_de_chave")
     private boolean cabecaDeChave = false;
 
     @ManyToOne
     @JoinColumn(name = "equipe_id", nullable = false)
-    @JsonIgnoreProperties("historicoParticipacoes")
+    @JsonIgnoreProperties({"historicoParticipacoes", "atletas", "documentacao"})
     private EquipeModel equipe;
 
     @ManyToOne

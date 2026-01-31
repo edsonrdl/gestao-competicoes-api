@@ -31,7 +31,7 @@ public class ModalidadeModel {
 
     @OneToMany(mappedBy = "modalidade", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(description = "Lista de regras específicas desta modalidade",accessMode = Schema.AccessMode.READ_ONLY)
-    private List<RegulamentoModalidadeModel> regrasEspecificas = new ArrayList<>();
+    private List<RegulamentoModalidadeModel> regulamentoModalidadeModel = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "campeonato_id")

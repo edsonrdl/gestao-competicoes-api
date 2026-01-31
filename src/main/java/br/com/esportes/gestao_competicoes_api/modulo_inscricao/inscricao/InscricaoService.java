@@ -24,15 +24,15 @@ public class InscricaoService {
         this.modalidadeRepository = modalidadeRepository;
     }
 
-    public InscricaoModel realizarInscricao(Long idEquipe, Long idModalidade) {
-
+// Método atualizado para receber o boolean cabecaDeChave
+    public InscricaoModel realizarInscricao(Long idEquipe, Long idModalidade, boolean cabecaDeChave) {
 
         EquipeModel equipe = equipeRepository.findById(idEquipe)
-                .orElseThrow(() -> new RuntimeException("Equipe não cadastrada!"));
-
+                .orElseThrow(() -> new RuntimeException("Equipe não cadastrada com ID: " + idEquipe));
 
         ModalidadeModel modalidade = modalidadeRepository.findById(idModalidade)
-                .orElseThrow(() -> new RuntimeException("Modalidade não encontrada!"));
+                .orElseThrow(() -> new RuntimeException("Modalidade não encontrada com ID: " + idModalidade));
+
 
 
         InscricaoModel novaInscricao = new InscricaoModel();
@@ -40,6 +40,8 @@ public class InscricaoService {
         novaInscricao.setModalidade(modalidade);
         novaInscricao.setDataInscricao(LocalDate.now());
         novaInscricao.setStatus("PENDENTE");
+        
+        novaInscricao.setCabecaDeChave(cabecaDeChave); 
 
         return inscricaoRepository.save(novaInscricao);
     }

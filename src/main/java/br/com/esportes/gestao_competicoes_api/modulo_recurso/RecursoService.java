@@ -28,11 +28,20 @@ public class RecursoService {
 
 
     public RecursoModel abrirRecurso(Long idEquipe, Long idCampeonato, String descricao) {
+
+        if (idEquipe == null || idCampeonato == null) {
+            throw new IllegalArgumentException("Os IDs da Equipe e do Campeonato são obrigatórios para abrir um recurso.");
+        }
+
+        if (descricao == null || descricao.isBlank()) {
+            throw new IllegalArgumentException("A descrição do recurso não pode estar vazia.");
+        }
+
         EquipeModel equipe = equipeRepository.findById(idEquipe)
-                .orElseThrow(() -> new RuntimeException("Equipe não encontrada"));
+                .orElseThrow(() -> new RuntimeException("Equipe não encontrada com o ID: " + idEquipe));
 
         CampeonatoModel campeonato = campeonatoRepository.findById(idCampeonato)
-                .orElseThrow(() -> new RuntimeException("Campeonato não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Campeonato não encontrado com o ID: " + idCampeonato));
 
         RecursoModel recurso = new RecursoModel();
         recurso.setDescricao(descricao);
