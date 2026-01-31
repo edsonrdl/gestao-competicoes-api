@@ -34,10 +34,11 @@ public class EquipeService {
 
         equipeExistente.setNome(novosDados.getNome());
         equipeExistente.setNomeResponsavel(novosDados.getNomeResponsavel());
+        equipeExistente.setEmail(novosDados.getEmail());
+        equipeExistente.setTelefone(novosDados.getTelefone());
 
-        if (novosDados.getContato() != null) {
-            equipeExistente.setContato(novosDados.getContato());
-        }
+
+
 
         return equipeRepository.save(equipeExistente);
     }
