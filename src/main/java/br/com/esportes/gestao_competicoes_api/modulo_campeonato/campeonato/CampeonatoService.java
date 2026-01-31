@@ -20,14 +20,15 @@ public class CampeonatoService {
                 .orElseThrow(() -> new RuntimeException("Competição não encontrada!"));
     }
 
-    public CampeonatoModel atualizarCampeonato(Long idCompeticao, CampeonatoModel competicaoNovosDados) {
+    public CampeonatoModel atualizarCampeonato(Long idCompeticao, CampeonatoRequestDTO dto) {
         CampeonatoModel competicaoExistente = campeonatoRepository.findById(idCompeticao)
-                .orElseThrow(() -> new RuntimeException("Competição não encontrada com ID: " + idCompeticao));
+                .orElseThrow(() -> new RuntimeException("Competição não encontrada"));
 
-        competicaoExistente.setNome(competicaoNovosDados.getNome());
-        competicaoExistente.setRegulamentos(competicaoNovosDados.getRegulamentos());
-        competicaoExistente.setDataInicio(competicaoNovosDados.getDataInicio());
-        competicaoExistente.setDataFim(competicaoNovosDados.getDataFim());
+        // Você altera APENAS o que o DTO permite.
+        // A lista 'regulamentos' que está no 'competicaoExistente' nem é tocada.
+        competicaoExistente.setNome(dto.nome());
+        competicaoExistente.setDataInicio(dto.dataInicio());
+        competicaoExistente.setDataFim(dto.dataFim());
 
         return campeonatoRepository.save(competicaoExistente);
     }
