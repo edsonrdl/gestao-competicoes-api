@@ -37,9 +37,6 @@ public class EquipeService {
         equipeExistente.setEmail(novosDados.getEmail());
         equipeExistente.setTelefone(novosDados.getTelefone());
 
-
-
-
         return equipeRepository.save(equipeExistente);
     }
 
