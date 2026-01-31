@@ -1,6 +1,7 @@
 package br.com.esportes.gestao_competicoes_api.modulo_recurso;
 
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,19 @@ public class RecursoController {
     }
 
     @PostMapping
-    @Operation(summary = "Abrir Recurso", description = "Time envia uma solicitação de recurso.")
-    public ResponseEntity<RecursoModel> abrirRecurso(@RequestBody RecursoModel payload) {
+    @Operation(summary = "Abrir Recurso", description = "Time envia uma solicitação de recurso informando os IDs.")
+    public ResponseEntity<RecursoModel> abrirRecurso(@RequestBody @Valid RecursoRequestDTO recursoRequestDTO) {
 
-        Long idEquipe = payload.getEquipeSolicitante().getId();
-        Long idCamp = payload.getCampeonato().getId();
+        if (recursoRequestDTO.idEquipe() == null || recursoRequestDTO.idCampeonato() == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
-        RecursoModel novoRecurso = recursoService.abrirRecurso(idEquipe, idCamp, payload.getDescricao());
+        RecursoModel novoRecurso = recursoService.abrirRecurso(
+                recursoRequestDTO.idEquipe(),
+                recursoRequestDTO.idCampeonato(),
+                recursoRequestDTO.descricao()
+        );
+
         return ResponseEntity.status(HttpStatus.CREATED).body(novoRecurso);
     }
 
@@ -44,8 +51,4 @@ public class RecursoController {
         return ResponseEntity.ok(recursoAtualizado);
     }
 
-    @GetMapping("/campeonato/{idCampeonato}")
-    public ResponseEntity<List<RecursoModel>> listarPorCampeonato(@PathVariable Long idCampeonato) {
-        return ResponseEntity.ok(recursoService.listarPorCampeonato(idCampeonato));
-    }
 }
