@@ -315,3 +315,207 @@ com.projeto.esportivo
     - Método `gerarResultadoSorteio()`: Busca os Grupos formados e exporta.
 - **Controller (`RelatorioController`):**
     - `GET /relatorios/equipes-inscritas`: Baixa o arquivo.
+
+---
+Parabéns pela conclusão do projeto! 🚀
+
+Aqui está uma formatação profissional e organizada, pronta para ser usada no seu arquivo `README.md`, na documentação da API ou em uma apresentação de entrega.
+
+Organizei por **Módulos** para facilitar a leitura e usei ícones para destacar as seções.
+
+---
+
+# 🏆 Funcionalidades do Sistema de Gestão de Competições
+
+Abaixo estão listadas todas as funcionalidades implementadas na versão final do projeto, organizadas por módulos de gerenciamento.
+
+### 📅 Gestão de Campeonatos
+
+Gerenciamento completo do ciclo de vida das competições e suas regras.
+
+- **Campeonato:**
+  - [x]  Criar Campeonato
+  - [x]  Buscar Campeonato (Por ID ou Listagem)
+  - [x]  Atualizar dados do Campeonato
+  - [x]  Deletar Campeonato
+- **Regulamento do Campeonato:**
+  - [x]  Definir Regulamento Geral
+  - [x]  Consultar Regulamento
+  - [x]  Atualizar termos do Regulamento
+  - [x]  Remover Regulamento
+
+### ⚽ Gestão de Modalidades
+
+Administração das categorias esportivas dentro do campeonato.
+
+- **Modalidade:**
+  - [x]  Cadastrar Modalidade
+  - [x]  Consultar Modalidade
+  - [x]  Editar Modalidade
+  - [x]  Excluir Modalidade
+- **Regulamento da Modalidade:**
+  - [x]  Criar Regulamento Específico
+  - [x]  Buscar Regulamento
+  - [x]  Atualizar Regulamento
+  - [x]  Deletar Regulamento
+
+### 🛡️ Gestão de Equipes
+
+Controle das agremiações e seus documentos legais.
+
+- [x]  Cadastrar Equipe
+- [x]  Listar todas as Equipes
+- [x]  Buscar Equipe por ID
+- [x]  Atualizar dados cadastrais
+- [x]  Excluir Equipe
+- **Documentação:**
+  - [x]  Upload de documentos da Equipe
+  - [x]  Download/Visualização de documentos
+
+### 🏃 Gestão de Atletas
+
+Controle individual dos participantes e identificação visual.
+
+- [x]  Cadastrar Atleta
+- [x]  Listar todos os Atletas
+- [x]  Buscar Atleta por ID
+- [x]  Atualizar dados do Atleta
+- [x]  Excluir Atleta
+- **Identificação:**
+  - [x]  Upload de foto do Atleta
+  - [x]  Download/Visualização da foto
+
+### 📝 Processos Operacionais
+
+Fluxos principais de funcionamento da competição.
+
+- **Inscrições:**
+  - [x]  Realizar inscrição de equipes nas modalidades do campeonato.
+- **Recursos Administrativos:**
+  - [x]  **Solicitação:** Abertura de recurso por parte da equipe (envio de justificativa).
+  - [x]  **Julgamento:** Inserção de parecer da comissão e deferimento/indeferimento.
+
+### 🎲 Sorteio Automatizado
+
+Algoritmo inteligente para definição de chaves e grupos.
+
+- [x]  **Execução do Sorteio:** Criação automática da quantidade de grupos solicitada.
+- [x]  **Cabeças de Chave:** Distribuição prioritária de times definidos como cabeças de chave.
+- [x]  **Distribuição Aleatória:** Preenchimento das vagas restantes com as demais equipes.
+- [x]  **Auditoria:** Geração de logs detalhados de cada etapa do sorteio.
+
+### 📊 Relatórios e Consultas
+
+Painéis para visualização de dados consolidados.
+
+- [x]  **Sorteio:** Visualização dos grupos formados e distribuição dos times.
+- [x]  **Recursos:** Histórico completo de disputas e pareceres da comissão.
+- [x]  **Elenco:** Listagem de atletas vinculados por equipe.
+- [x]  **Inscritos:** Relatório oficial de equipes confirmadas por modalidade.
+- 
+
+
+---
+
+# ⚙️ Guia de Configuração de Ambiente
+
+Este guia cobre a instalação das ferramentas necessárias (Git, Java 21, Docker) e como executar a API de Gestão de Competições.
+
+## 1. Instalação do Git
+
+O Git é necessário para clonar o repositório e versionar o código.
+
+1. Acesse o site oficial: https://git-scm.com/download/win
+2. Baixe a versão para **Windows** (64-bit).
+3. Execute o instalador e siga as opções padrão (Next, Next...).
+4. Para verificar se instalou, abra o terminal (CMD ou PowerShell) e digite:Bash
+
+   `git --version`
+
+
+## 2. Instalação do Java 21 (JDK)
+
+O projeto utiliza o Java 21. Vamos instalá-lo rapidamente via terminal usando o gerenciador de pacotes do Windows.
+
+1. Abra o **PowerShell** ou **CMD** do Windows.
+2. Copie e cole o comando abaixo e aperte Enter:PowerShell
+
+   `winget install --id Oracle.JDK.21`
+
+3. Aguarde o download e a instalação automática.
+4. Após finalizar, feche o terminal e abra um novo para verificar a instalação:Bash
+
+   `java -version`
+
+   *Deve aparecer a versão `21` instalada.*
+
+
+## 3. Instalação do Docker e Docker Compose
+
+O Docker é essencial para rodar o banco de dados (PostgreSQL) ou a aplicação inteira em container.
+
+1. Baixe o **Docker Desktop** para Windows: https://www.docker.com/products/docker-desktop/
+2. Instale o programa.
+  - *Nota:* O Docker Desktop no Windows geralmente requer o **WSL 2** (Windows Subsystem for Linux). O instalador pode pedir para você instalar isso.
+3. Após instalar, **abra o aplicativo Docker Desktop** e aguarde a luz verde no canto inferior esquerdo indicando que a "Engine" está rodando.
+4. Verifique no terminal:Bash
+
+   `docker --version
+   docker-compose --version`
+
+
+---
+
+## 4. Executando no VS Code (Desenvolvimento Local)
+
+### Pré-requisitos do VS Code
+
+Certifique-se de instalar o **"Extension Pack for Java"** da Microsoft na loja de extensões do VS Code.
+
+### Passos:
+
+1. Abra a pasta do projeto no VS Code.
+2. Aguarde o VS Code carregar o projeto (ícone de carregamento no rodapé). Ele irá identificar o arquivo `pom.xml`.
+3. **Instalar Dependências (Maven):**
+  - Abra o terminal integrado (`Ctrl + '`).
+  - Execute o comando para baixar as bibliotecas e compilar:Bash
+
+    `./mvnw clean install`
+
+    *(Se estiver no Windows CMD e o comando acima falhar, use `mvn clean install` se tiver o maven instalado globalmente, ou `./mvnw.cmd clean install`).*
+
+4. **Rodar a Aplicação:**
+  - Vá até o arquivo principal: `src/main/java/.../GestãoCompeticoesApiApplication.java`.
+  - Clique em "Run" (ou aperte `F5`).
+
+---
+
+## 5. Executando via Docker (Caso local falhe)
+
+Se você tiver problemas para configurar o Java ou Banco de Dados localmente, você pode rodar a aplicação inteira isolada dentro do Docker.
+
+**Certifique-se de que o Docker Desktop está aberto e rodando.**
+
+1. Abra o terminal na **raiz do projeto** (onde está o arquivo `docker-compose.yml` ou `Dockerfile`).
+2. Execute o comando para subir o banco de dados e a API:Bash
+
+   `docker-compose up -d --build`
+
+  - `d`: Roda em segundo plano (libera o terminal).
+  - `-build`: Força a recriação da imagem com suas últimas alterações de código.
+3. Verifique se os containers subiram:Bash
+
+   `docker ps`
+
+   *(Você deve ver o container do Postgres e o container da API rodando).*
+
+4. Para ver os logs (caso dê erro):Bash
+
+   `docker-compose logs -f`
+
+
+## 6. Testando a Aplicação
+
+Independente se rodou via VS Code ou Docker, acesse a documentação Swagger para testar:
+
+📍 **Link:** [http://localhost:8080/swagger-ui.html](https://www.google.com/search?q=http://localhost:8080/swagger-ui.html&authuser=1)
