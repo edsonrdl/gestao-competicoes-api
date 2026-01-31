@@ -1,6 +1,7 @@
 package br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.regulamento;
 
 
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato.regulamento.RegulamentoCampeonatoModel;
 import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeModel;
 import br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.ModalidadeRepository;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,9 @@ public class RegulamentoModalidadeService {
         return regulamentoRepository.save(regra);
     }
 
-    public List<RegulamentoModalidadeModel> listarRegras() {
-        return regulamentoRepository.findAll();
+    public RegulamentoModalidadeModel buscarRegulamentoCampeonato(Long idModalidade) {
+        return regulamentoRepository.findById(idModalidade)
+                .orElseThrow(() -> new RuntimeException("Regulamento não encontrada!"));
     }
 
     public RegulamentoModalidadeModel atualizarRegulamentoModalidade(Long idRegra, RegulamentoModalidadeModel novosDados) {
