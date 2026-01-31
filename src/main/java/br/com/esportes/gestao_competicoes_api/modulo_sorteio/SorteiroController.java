@@ -15,7 +15,7 @@ public class SorteiroController {
 
     private SorteioService sorteioService;
 
-    public SorteiroController(SorteioService sorteioService, InscricaoRepository inscricaoRepository) {
+    public SorteiroController(SorteioService sorteioService) {
         this.sorteioService = sorteioService;
     }
 
