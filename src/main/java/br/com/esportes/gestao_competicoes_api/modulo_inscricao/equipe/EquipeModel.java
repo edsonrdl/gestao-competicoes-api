@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,9 +36,14 @@ public class EquipeModel {
     @Schema(description = "Nome do responsável/técnico", example = "Seu Creysson")
     private String nomeResponsavel;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contato_id", referencedColumnName = "id")
-    private ContatoModel contato;
+    @Email(message = "O formato do email é inválido")
+    @Column(name = "email_responsavel")
+    @Schema(description = "E-mail oficial de contato", example = "diretoria@tabajarafutebol.com.br")
+    private String email;
+
+    @Column(name = "telefone_responsavel")
+    @Schema(description = "Celular ou WhatsApp", example = "(11) 99876-5432")
+    private String telefone;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
