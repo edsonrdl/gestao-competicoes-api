@@ -29,12 +29,11 @@ public class ModalidadeService {
         return modalidadeRepository.findById(id).orElseThrow();
     }
 
-    public ModalidadeModel atualizarModalidade(Long idModalidade, ModalidadeModel modalidadeModelUpdate) {
+    public ModalidadeModel atualizarModalidade(Long idModalidade, ModalidadeRequestDTO modalidadeRequestDTO) {
         ModalidadeModel modalidadeModel = modalidadeRepository.findById(idModalidade)
                 .orElseThrow(() -> new RuntimeException("Modalidade não encontrada com ID: " + idModalidade));
 
-        modalidadeModel.setNome(modalidadeModelUpdate.getNome());
-        modalidadeModel.setCampeonato(modalidadeModelUpdate.getCampeonato());
+        modalidadeModel.setNome(modalidadeRequestDTO.nome());
 
         return modalidadeRepository.save(modalidadeModel);
     }
