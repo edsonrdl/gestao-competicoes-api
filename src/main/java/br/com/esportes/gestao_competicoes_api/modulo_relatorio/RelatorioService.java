@@ -1,6 +1,5 @@
 package br.com.esportes.gestao_competicoes_api.modulo_relatorio;
 
-
 import br.com.esportes.gestao_competicoes_api.modulo_inscricao.atleta.AtletaModel;
 import br.com.esportes.gestao_competicoes_api.modulo_inscricao.atleta.AtletaRepository;
 import br.com.esportes.gestao_competicoes_api.modulo_inscricao.inscricao.InscricaoModel;
@@ -20,7 +19,6 @@ import java.util.List;
 @Service
 public class RelatorioService {
 
-
     private final InscricaoRepository inscricaoRepository;
     private final AtletaRepository atletaRepository;
     private final GrupoRepository grupoRepository;
@@ -36,26 +34,21 @@ public class RelatorioService {
         this.recursoRepository = recursoRepository;
     }
 
-
     public List<InscricaoModel> gerarRelatorioInscritos(Long idModalidade) {
         return inscricaoRepository.findByModalidadeId(idModalidade);
     }
 
-
     public List<AtletaModel> gerarRelatorioAtletas(Long idEquipe) {
-
         return atletaRepository.findAll().stream()
                 .filter(a -> a.getEquipe().getId().equals(idEquipe))
                 .toList();
     }
 
     public List<GrupoModel> gerarRelatorioSorteio(Long idModalidade) {
-
         return grupoRepository.findAll().stream()
                 .filter(g -> g.getModalidade().getId().equals(idModalidade))
                 .toList();
     }
-
 
     public List<RecursoModel> gerarHistoricoRecursos(Long idCampeonato) {
         return recursoRepository.findByCampeonatoId(idCampeonato);
@@ -94,19 +87,19 @@ public class RelatorioService {
                 // Célula 0: ID
                 row.createCell(0).setCellValue(inscricao.getId());
 
-                // Célula 1: Nome da Equipe (Navegando no objeto)
+                // Célula 1: Nome da Equipe
                 row.createCell(1).setCellValue(inscricao.getEquipe().getNome());
 
                 // Célula 2: Responsável
                 row.createCell(2).setCellValue(inscricao.getEquipe().getNomeResponsavel());
 
-                // Célula 3: Email (Verifica se contato existe para não dar erro)
-                String email = (inscricao.getEquipe().getContato() != null) ? inscricao.getEquipe().getContato().getEmail() : "N/A";
-                row.createCell(3).setCellValue(email);
+                // Célula 3: Email (Acesso Direto agora)
+                String email = inscricao.getEquipe().getEmail();
+                row.createCell(3).setCellValue(email != null ? email : "N/A");
 
-                // Célula 4: Telefone
-                String tel = (inscricao.getEquipe().getContato() != null) ? inscricao.getEquipe().getContato().getTelefonePrincipal() : "N/A";
-                row.createCell(4).setCellValue(tel);
+                // Célula 4: Telefone (Acesso Direto agora)
+                String tel = inscricao.getEquipe().getTelefone();
+                row.createCell(4).setCellValue(tel != null ? tel : "N/A");
 
                 // Célula 5: Data
                 row.createCell(5).setCellValue(inscricao.getDataInscricao().toString());
@@ -115,7 +108,7 @@ public class RelatorioService {
                 row.createCell(6).setCellValue(inscricao.getStatus());
             }
 
-            // --- AJUSTE AUTOMÁTICO DAS COLUNAS (Ficar bonito) ---
+            // --- AJUSTE AUTOMÁTICO DAS COLUNAS ---
             for (int i = 0; i < colunas.length; i++) {
                 sheet.autoSizeColumn(i);
             }
