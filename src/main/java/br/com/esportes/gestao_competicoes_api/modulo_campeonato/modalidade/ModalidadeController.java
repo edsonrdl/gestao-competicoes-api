@@ -17,6 +17,7 @@ public class ModalidadeController {
     }
 
     @PostMapping("/{idCampeonato}/criar-modalidade")
+    @Operation(summary = "Criar Modalidade", description = "Perfil: Organizador (Comissão Técnica)/Criar modalidade.")
     public ResponseEntity<ModalidadeModel> criarModalidade(
             @PathVariable Long idCampeonato,
             @RequestBody @Valid ModalidadeModel modalidade) {
@@ -25,23 +26,25 @@ public class ModalidadeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novaModalidade);
     }
 
-    @GetMapping("/buscar-modalidade-por-id/{idCampeonato}")
-    public ResponseEntity<ModalidadeModel> buscarModalidadePorId(@PathVariable Long idCampeonato) {
-        ModalidadeModel modalidadeModel=modalidadeService.buscarModalidadePorId(idCampeonato);
+    @GetMapping("/buscar-modalidade-por-id/{idModalidade}")
+    @Operation(summary = "Busca Modalidade", description = "Perfil: Organizador (Comissão Técnica)/Busca modalidade existente pelo id da modalidade.")
+    public ResponseEntity<ModalidadeModel> buscarModalidadePorId(@PathVariable Long idModalidade) {
+        ModalidadeModel modalidadeModel=modalidadeService.buscarModalidadePorId(idModalidade);
         return ResponseEntity.status(HttpStatus.OK).body(modalidadeModel);
     }
 
     @PutMapping("/atualizar-modalidade/{idModalidade}")
-    @Operation(summary = "Atualizar modalidade", description = "Perfil usado:      /Atualiza os dados de uma modalidade existente pelo  pelo id da modalidade.")
+    @Operation(summary = "Atualiza Modalidade", description = "Perfil: Organizador (Comissão Técnica)/Atualizar modalidade existente pelo id da modalidade.")
     public ResponseEntity<ModalidadeModel> atualizarModalidade(
             @PathVariable Long idModalidade,
-            @RequestBody ModalidadeModel modalidadeModel) {
+            @RequestBody ModalidadeRequestDTO modalidadeRequestDTO) {
 
-        ModalidadeModel modalidadeAtualizada = modalidadeService.atualizarModalidade(idModalidade, modalidadeModel);
+        ModalidadeModel modalidadeAtualizada = modalidadeService.atualizarModalidade(idModalidade, modalidadeRequestDTO);
         return ResponseEntity.ok(modalidadeAtualizada);
     }
 
     @DeleteMapping("/deletar-modalidade/{idModalidedade}")
+    @Operation(summary = "Deletar Modalidade", description = "Perfil: Organizador (Comissão Técnica)/Deletar modalidade existente pelo id da modalidade.")
     public ResponseEntity<Void> deletarModalidade(@PathVariable Long idModalidedade) {
         modalidadeService.deletarModalidadePorId(idModalidedade);
         return ResponseEntity.noContent().build();
