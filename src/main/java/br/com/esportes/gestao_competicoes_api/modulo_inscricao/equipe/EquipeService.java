@@ -20,7 +20,7 @@ public class EquipeService {
         return equipeRepository.save(equipe);
     }
 
-    public List<EquipeModel> listarTodas() {
+    public List<EquipeModel> listarTodasEquipes() {
         return equipeRepository.findAll();
     }
 
