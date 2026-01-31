@@ -1,5 +1,6 @@
 package br.com.esportes.gestao_competicoes_api.modulo_campeonato.modalidade.regulamento;
 
+import br.com.esportes.gestao_competicoes_api.modulo_campeonato.campeonato.regulamento.RegulamentoCampeonatoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +12,10 @@ import java.util.List;
 @RequestMapping("/regulamento-modalidade")
 public class RegulamentoModalidadeController {
 
-    private final RegulamentoModalidadeService service;
+    private final RegulamentoModalidadeService regulamentoModalidadeService;
 
-    public RegulamentoModalidadeController(RegulamentoModalidadeService service) {
-        this.service = service;
+    public RegulamentoModalidadeController(RegulamentoModalidadeService regulamentoModalidadeService) {
+        this.regulamentoModalidadeService = regulamentoModalidadeService;
     }
 
     @PostMapping("/{idModalidade}/adicionar-regra")
@@ -24,12 +25,14 @@ public class RegulamentoModalidadeController {
             @RequestBody RegulamentoModalidadeModel regra) {
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(service.adicionarRegra(idModalidade, regra));
+                .body(regulamentoModalidadeService.adicionarRegra(idModalidade, regra));
     }
 
-    @GetMapping
-    public ResponseEntity<List<RegulamentoModalidadeModel>> listarTodas() {
-        return ResponseEntity.ok(service.listarRegras());
+    @GetMapping("/buscar-regulamento-por-id/{idRegulamentoModalidade}")
+    @Operation(summary = "Buscar regulamento modalidade", description = "Perfil: Organizador (Comissão Técnica)/Buscar informações do regulamento pelo id do regulamento.")
+    public ResponseEntity<RegulamentoModalidadeModel> buscarCampeonatoPorId(@PathVariable Long idRegulamentoModalidade) {
+        RegulamentoModalidadeModel regulamentoModalidadeModel = regulamentoModalidadeService.buscarRegulamentoCampeonato(idRegulamentoModalidade);
+        return ResponseEntity.ok(regulamentoModalidadeModel);
     }
 
     @PutMapping("/{idRegra}")
@@ -38,12 +41,12 @@ public class RegulamentoModalidadeController {
             @PathVariable Long idRegra,
             @RequestBody RegulamentoModalidadeModel regra) {
 
-        return ResponseEntity.ok(service.atualizarRegulamentoModalidade(idRegra, regra));
+        return ResponseEntity.ok(regulamentoModalidadeService.atualizarRegulamentoModalidade(idRegra, regra));
     }
 
     @DeleteMapping("/{idRegra}")
     public ResponseEntity<Void> deletarRegra(@PathVariable Long idRegra) {
-        service.deletarRegra(idRegra);
+        regulamentoModalidadeService.deletarRegra(idRegra);
         return ResponseEntity.noContent().build();
     }
 }
