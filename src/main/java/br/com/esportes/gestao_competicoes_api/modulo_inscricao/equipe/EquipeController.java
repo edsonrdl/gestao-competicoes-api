@@ -25,7 +25,7 @@ public class EquipeController {
     }
 
     @PostMapping("/criar-equipe")
-    @Operation(summary = "1. Criar Equipe", description = "Cria a equipe e retorna o ID gerado. Use este ID para enviar a documentação depois.")
+    @Operation(summary = "Criar Equipe", description = "Cria a equipe e retorna o ID gerado. Use este ID para enviar a documentação depois.")
     public ResponseEntity<EquipeModel> criarEquipe(@RequestBody EquipeModel equipe) {
         return ResponseEntity.status(HttpStatus.CREATED).body(equipeService.salvarEquipe(equipe));
     }
@@ -37,7 +37,7 @@ public class EquipeController {
         return ResponseEntity.ok(equipeService.buscarEquipe(idEquipe));
     }
 
-    @GetMapping
+    @GetMapping("/buscar-todas-equipes")
     @Operation(summary = "Buscar todas as equipes", description = "Perfil: Organizador (Comissão Técnica)/ Buscar todas as equipes.")
     public ResponseEntity<List<EquipeModel>> listarTodasEquipes() {
         return ResponseEntity.ok(equipeService.listarTodasEquipes());
