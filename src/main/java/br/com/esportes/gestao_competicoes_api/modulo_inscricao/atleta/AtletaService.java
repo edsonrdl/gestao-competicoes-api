@@ -20,11 +20,7 @@ public class AtletaService {
         this.equipeRepository = equipeRepository;
     }
 
-    public AtletaModel salvar(AtletaModel atleta) {
-        return atletaRepository.save(atleta);
-    }
-
-    public AtletaModel criarAtletaVinculado(Long idEquipe, AtletaModel atleta) {
+    public AtletaModel criarAtleta(Long idEquipe, AtletaModel atleta) {
         EquipeModel equipe = equipeRepository.findById(idEquipe)
                 .orElseThrow(() -> new RuntimeException("Equipe não encontrada com ID: " + idEquipe));
 
@@ -33,7 +29,18 @@ public class AtletaService {
         return atletaRepository.save(atleta);
     }
 
-    public AtletaModel buscar(Long id) {
+    public AtletaModel atualizarAtleta(Long idAtleta, AtletaRequestDTO atletaRequestDTO) {
+        AtletaModel atletaModel=buscarAtleta(idAtleta);
+        atletaModel.setNome(atletaRequestDTO.nome());
+        atletaModel.setCpfDocumento(atletaRequestDTO.cpfDocumento());
+        atletaModel.setRg(atletaRequestDTO.rg());
+        atletaModel.setOrgaoEmissor(atletaRequestDTO.orgaoEmissor());
+
+        return atletaRepository.save(atletaModel);
+
+    }
+
+    public AtletaModel buscarAtleta(Long id) {
         return atletaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Atleta não encontrado"));
     }
@@ -50,7 +57,7 @@ public class AtletaService {
     }
 
     public void salvarFoto(Long id, MultipartFile arquivo) throws IOException {
-        AtletaModel atleta = buscar(id);
+        AtletaModel atleta = buscarAtleta(id);
         atleta.setFoto(arquivo.getBytes());
         atleta.setFotoTipo(arquivo.getContentType());
         atletaRepository.save(atleta);
