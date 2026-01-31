@@ -30,35 +30,41 @@ public class EquipeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(equipeService.salvarEquipe(equipe));
     }
 
-    @GetMapping
-    public ResponseEntity<List<EquipeModel>> listarTodas() {
-        return ResponseEntity.ok(equipeService.listarTodas());
+
+    @GetMapping("buscar-equipe/{idEquipe}")
+    @Operation(summary = "buscar equipe", description = "Perfil: Organizador (Comissão Técnica)/ Perfil: Representante da Equipe/ Buscar equipe.")
+    public ResponseEntity<EquipeModel> buscarPorId(@PathVariable Long idEquipe) {
+        return ResponseEntity.ok(equipeService.buscarEquipe(idEquipe));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<EquipeModel> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(equipeService.buscarEquipe(id));
+    @GetMapping
+    @Operation(summary = "Buscar todas as equipes", description = "Perfil: Organizador (Comissão Técnica)/ Buscar todas as equipes.")
+    public ResponseEntity<List<EquipeModel>> listarTodasEquipes() {
+        return ResponseEntity.ok(equipeService.listarTodasEquipes());
     }
+
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualizar equipe", description = "Perfil: Representante da Equipe / Atualizar equipe.")
     public ResponseEntity<EquipeModel> atualizarDados(@PathVariable Long id, @RequestBody EquipeModel equipe) {
         return ResponseEntity.ok(equipeService.atualizarDadosEquipe(id, equipe));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        equipeService.deletarEquipe(id);
+    @DeleteMapping("/{idEquipe}")
+    @Operation(summary = "Deletar equipe", description = "Perfil: Representante da Equipe / Deletar equipe.")
+    public ResponseEntity<Void> deletar(@PathVariable Long idEquipe) {
+        equipeService.deletarEquipe(idEquipe);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping(value = "/{id}/documentacao", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "2. Upload do Documento/Logo", description = "Envia a foto para uma equipe já criada.")
+    @PostMapping(value = "/{idEquipe}/documentacao", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "Upload do Documento", description = "Perfil: Representante da Equipe/ Envia a foto do documento da equipe.")
     public ResponseEntity<String> uploadDocumentacao(
-            @PathVariable Long id,
+            @PathVariable Long idEquipe,
             @RequestParam("arquivo") MultipartFile arquivo) {
 
         try {
-            equipeService.atualizarDocumentacao(id, arquivo);
+            equipeService.atualizarDocumentacao(idEquipe, arquivo);
             return ResponseEntity.ok("Documentação enviada com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erro ao enviar foto: " + e.getMessage());
@@ -66,6 +72,7 @@ public class EquipeController {
     }
 
     @GetMapping("/{id}/visualizar-documentacao")
+    @Operation(summary = "Buscar foto do documento da equipe", description = "Perfil: Organizador (Comissão Técnica)/ Perfil: Representante da Equipe/ Buscar foto do documento da equipe.")
     public ResponseEntity<byte[]> visualizarDocumento(@PathVariable Long id) {
         EquipeModel equipe = equipeService.buscarEquipe(id);
 
