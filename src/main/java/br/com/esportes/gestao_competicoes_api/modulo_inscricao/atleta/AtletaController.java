@@ -20,68 +20,62 @@ public class AtletaController {
     }
 
     @PostMapping("/{idEquipe}/criar-atleta")
-    @Operation(summary = "1. Criar Atleta", description = "Cria o atleta vinculado à equipe e retorna o ID. Use este ID para enviar a foto depois.")
+    @Operation(summary = "Criar Atleta", description = "Perfil: Representante da Equipe/ Cria o atleta vinculado à equipe e retorna o ID.")
     public ResponseEntity<AtletaModel> criarAtleta(
             @PathVariable Long idEquipe,
             @RequestBody AtletaModel atleta) {
 
-        AtletaModel novoAtleta = atletaService.criarAtletaVinculado(idEquipe, atleta);
+        AtletaModel novoAtleta = atletaService.criarAtleta(idEquipe, atleta);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoAtleta);
     }
 
-    @PostMapping(value = "/{id}/enviar-foto-atleta", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "2. Upload da Foto", description = "Envia a foto para um atleta já criado.")
+    @PostMapping(value = "/{idAtleta}/enviar-foto-atleta", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "Upload da Foto do atleta", description = "Perfil: Representante da Equipe/ Envia a foto do Foto do atleta.")
     public ResponseEntity<String> uploadFoto(
-            @PathVariable Long id,
+            @PathVariable Long idAtleta,
             @RequestParam("arquivo") MultipartFile arquivo) {
         try {
-            atletaService.salvarFoto(id, arquivo);
+            atletaService.salvarFoto(idAtleta, arquivo);
             return ResponseEntity.ok("Foto salva com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erro: " + e.getMessage());
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<AtletaModel> atualizar(@PathVariable Long id, @RequestBody AtletaModel novosDados) {
+    @PutMapping("/{idAtleta}")
+    @Operation(summary = "Atualizar atleta", description = "Perfil: Representante da Equipe/Atualizar atleta com id do atleta.")
+    public ResponseEntity<AtletaModel> atualizarAtleta(@PathVariable Long idAtleta, @RequestBody AtletaRequestDTO atletaRequestDTO) {
 
-        AtletaModel atleta = atletaService.buscar(id);
-
-        atleta.setNome(novosDados.getNome());
-        atleta.setCpfDocumento(novosDados.getCpfDocumento());
-        atleta.setRg(novosDados.getRg());
-        atleta.setOrgaoEmissor(novosDados.getOrgaoEmissor());
-
-        if (novosDados.getEquipe() != null) {
-            atleta.setEquipe(novosDados.getEquipe());
-        }
-
-        return ResponseEntity.ok(atletaService.salvar(atleta));
+        return ResponseEntity.ok(atletaService.atualizarAtleta(idAtleta,atletaRequestDTO));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AtletaModel> buscar(@PathVariable Long id) {
-        return ResponseEntity.ok(atletaService.buscar(id));
+    @GetMapping("/buscar-atleta/{idAtleta}")
+    @Operation(summary = "Buscar atleta", description = "Perfil: Representante da Equipe/Buscar atleta com id do atleta.")
+    public ResponseEntity<AtletaModel> buscarAtleta(@PathVariable Long idAtleta) {
+        return ResponseEntity.ok(atletaService.buscarAtleta(idAtleta));
     }
 
-    @GetMapping
-    public ResponseEntity<List<AtletaModel>> listar() {
+    @GetMapping("/listar-todos-atletas")
+    @Operation(summary = "Listar todos atletas", description = "Perfil: Representante da Equipe/Listar todos atletas.")
+    public ResponseEntity<List<AtletaModel>> listarAtletas() {
         return ResponseEntity.ok(atletaService.listar());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        atletaService.deletar(id);
+    @DeleteMapping("/deletar-atleta/{idAtleta}")
+    @Operation(summary = "Deletar  atleta", description = "Perfil: Representante da Equipe/Deletar  atleta.")
+    public ResponseEntity<Void> deletar(@PathVariable Long idAtleta) {
+        atletaService.deletar(idAtleta);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/visualizar-foto-atleta")
-    public ResponseEntity<byte[]> verFotoAtleta(@PathVariable Long id) {
-        AtletaModel atleta = atletaService.buscar(id);
-        if (atleta.getFoto() == null) return ResponseEntity.notFound().build();
+    @GetMapping("/{idAtleta}/visualizar-foto-atleta")
+    @Operation(summary = "Visualizar foto atleta", description = "Perfil: Representante da Equipe/Visualizar do atleta.")
+    public ResponseEntity<byte[]> verFotoAtleta(@PathVariable Long idAtleta) {
+        AtletaModel atletaModel = atletaService.buscarAtleta(idAtleta);
+        if (atletaModel.getFoto() == null) return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(atleta.getFotoTipo()))
-                .body(atleta.getFoto());
+                .contentType(MediaType.parseMediaType(atletaModel.getFotoTipo()))
+                .body(atletaModel.getFoto());
     }
 }
