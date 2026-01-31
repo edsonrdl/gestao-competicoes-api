@@ -19,7 +19,7 @@ public class RegulamentoCampeonatoController {
     }
 
     @PostMapping("/{idCampeonato}/adicionar-regulamento-campeonato")
-    @Operation(summary = "Adicionar Regra ao Campeonato", description = "Perfil: Organizador (Comissão Técnica)/Adiciona um artigo ou cláusula ao regulamento de um campeonato existente.")
+    @Operation(summary = "Adicionar regulamento campeonato ao Campeonato", description = "Perfil: Organizador (Comissão Técnica)/Adiciona um artigo ou cláusula ao regulamento de um campeonato existente.")
     public ResponseEntity<RegulamentoCampeonatoModel> adicionarRegulamentoCampeonato(
             @PathVariable Long idCampeonato,
             @RequestBody RegulamentoCampeonatoModel regra) {
@@ -29,14 +29,14 @@ public class RegulamentoCampeonatoController {
     }
 
     @GetMapping("/buscar-regulamento-por-id/{idRegulamentoCampeonato}")
-    @Operation(summary = "Buscar regulamento", description = "Perfil: Organizador (Comissão Técnica)/Buscar informações do regulamento pelo id do regulamento.")
+    @Operation(summary = "Buscar regulamento campeonato", description = "Perfil: Organizador (Comissão Técnica)/Buscar informações do regulamento pelo id do regulamento.")
     public ResponseEntity<RegulamentoCampeonatoModel> buscarCampeonatoPorId(@PathVariable Long idRegulamentoCampeonato) {
         RegulamentoCampeonatoModel regulamentoCampeonatoModel = regulamentoCampeonatoService.buscarRegulamentoCampeonato(idRegulamentoCampeonato);
         return ResponseEntity.ok(regulamentoCampeonatoModel);
     }
 
     @PutMapping("/{idRegulamento}")
-    @Operation(summary = "Atualizar Regra", description = "Perfil: Organizador (Comissão Técnica)/Altera regulamento.")
+    @Operation(summary = "Atualizar regulamento campeonato", description = "Perfil: Organizador (Comissão Técnica)/Altera regulamento.")
     public ResponseEntity<RegulamentoCampeonatoModel> atualizarRegulamentoCampeonato(
             @PathVariable Long idRegulamento,
             @RequestBody RegulamentoCampeonatoModel regulamentoCampeonatoModel) {
@@ -45,7 +45,7 @@ public class RegulamentoCampeonatoController {
     }
 
     @DeleteMapping("/{idRegulamento}")
-    @Operation(summary = "Deletar regulamento", description = "Perfil: Organizador (Comissão Técnica)/Deletar o regulamento pelo id do regulamento.")
+    @Operation(summary = "Deletar regulamento campeonato", description = "Perfil: Organizador (Comissão Técnica)/Deletar o regulamento pelo id do regulamento.")
     public ResponseEntity<Void> deletarRegra(@PathVariable Long idRegulamento) {
         regulamentoCampeonatoService.deletarRegra(idRegulamento);
         return ResponseEntity.noContent().build();
