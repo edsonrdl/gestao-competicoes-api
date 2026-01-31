@@ -13,7 +13,9 @@ import java.util.List;
 public class RecursoService {
 
     private RecursoRepository recursoRepository;
+
     private EquipeRepository equipeRepository;
+
     private CampeonatoRepository campeonatoRepository;
 
     public RecursoService(RecursoRepository recursoRepository,
@@ -57,7 +59,4 @@ public class RecursoService {
         return recursoRepository.save(recurso);
     }
 
-    public List<RecursoModel> listarPorCampeonato(Long idCampeonato) {
-        return recursoRepository.findByCampeonatoId(idCampeonato);
-    }
 }
